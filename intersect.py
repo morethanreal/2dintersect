@@ -12,11 +12,15 @@ def do_intersect(p1, p2, q1, q2):
 		if np.cross(np.subtract(p1, q1), r) != 0:
 			return False
 		else:
-			return (q1[0] >= p1[0] and q1[0] <= p1[0] or
-					q2[0] >= p1[0] and q2[0] <= p1[0] or
-					p1[0] >= q1[0] and p1[0] <= q1[0] or
-					p2[0] >= q1[0] and p2[0] <= q1[0]);
-		return 
+			# project onto x- and y-axis and check for overlap.
+			return ((q1[0] >= p1[0] and q1[0] <= p2[0] or
+				q2[0] >= p1[0] and q2[0] <= p2[0] or
+				p1[0] >= q1[0] and p1[0] <= q2[0] or
+				p2[0] >= q1[0] and p2[0] <= q2[0]) and
+				(q1[1] >= p1[1] and q1[1] <= p2[1] or
+					q2[1] >= p1[1] and q2[1] <= p2[1] or
+					p1[1] >= q1[1] and p1[1] <= q2[1] or
+					p2[1] >= q1[1] and p2[1] <= q2[1]));
 	# s1 and s2 intersect where s1 = s2 where 0 <= t <= 1 and 0 <= u <= 1
 	#   (p + tr) x s = (q + us) x s
 	# p x s + tr x s = q x s + us x s
